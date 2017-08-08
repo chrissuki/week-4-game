@@ -16,9 +16,9 @@ var player = {
     counterpoints : [10,20,25,25],
     health : [120,100,150,180],
     image: ["assets/images/megamanright2.gif", "assets/images/wolverine.png","assets/images/mario.png","assets/images/ryu.png"],
-    imageleft: ["assets/images/megaman4.gif","assets/images/wolverine.png"],
-    imageright: ["assets/images/megamanright.gif"],
-    imagefight: ["assets/images/megaman_left_attack.gif", "assets/images/wolverineLeft.gif"],
+    imageleft: ["assets/images/megaman4.gif","assets/images/wolverine.png","assets/images/marioleft.png","assets/images/rye_left.gif"],
+    imageright: ["assets/images/megamanright.gif","assets/images/wolverine.png","assets/images/mario.png","assets/images/ryuright.gif"],
+    imagefight: ["assets/images/megaman_left_attack.gif", "assets/images/wolverineLeft.gif", "assets/images/marioattack.gif", "assets/images/rye_left.gif"],
     ids : ["megaman", "wolverine", "mario", "ryu"],
     imagewins: ["assets/iamges/megaman4.png", "assets/images/wolverinewins.", "assets/images/mariowins.jpg","assets/images/ryuwins.jpg"],
 
@@ -29,7 +29,7 @@ var player = {
       $("#vs").attr("src","assets/images/vs.png");
       // player is false so that next character click will goto computer
       isplayerone = false;
-      $(".pick").html("Pick an enemy");
+      $(".pick").html("Pick an enemy.");
       console.log(playerone + "-playerone");
       //created hitpoints for character... in this function because hitpowers increase throughout the program
       playerOneAttack = player.hitpoints[characterIndex];
@@ -38,24 +38,30 @@ var player = {
     computerBoard:function(characterIndex){
       //makes playertwo = to 0 - 3
       playertwo = characterIndex;
+      // player one health is reset
+      playerOneHealth = player.health[playerone];
       //makes health and counter points for character
       playerTwoHealth = this.health[characterIndex];
       playerTwoAttack = this.counterpoints[characterIndex];
       //display computer image
-      $('#computer').attr("src", this.image[characterIndex]);
+      $('#computer').attr("src", this.imageright[characterIndex]);
       //used to reset playerone and playertwo points 
       firstAttack = true;
-      $(".pick").html("");
+      $(".pick").html("Hit attack button until there is a winner.");
+      //display health      
+      $("#playeroneTitle").html("Health = " + playerOneHealth);
+      $("#playertwoTitle").html("Health = " + playerTwoHealth);
     }
 
 };
 
 //attack button
 function attack(){
-      //removes <-- pick player 
-      $(".pick").html("");
+      //changes <-- pick player 
+      $(".pick").html("Keep hitting attack button.");
       //removes vs
       $("#vs").attr("src","");
+      
       // make player stats
       console.log(playerone + "-playerone");
       console.log(playertwo + "-playertwo");
@@ -66,9 +72,28 @@ function attack(){
         playerTwoAttack = player.counterpoints[playertwo];
         firstAttack = false;
       }
+
+
       //playerone attack gif
       $("#player").attr("src",player.imagefight[playerone]);
-      
+      if (playerone === 3){
+      	//$("#player").animate({ height: "1000px", width: "200px"});
+      	//$("#player").css("float","left");
+      	$("#player").attr("src","assets/images/ryu.png");
+      	$("#player").animate({ height: "+=10px" }, "fast");
+      	$("#player").animate({ height: "-=10px" }, "fast");
+      }
+      $("#player").animate({ left: "+=400px" }, "slow");
+      $("#player").animate({ left: "-=400px" }, "slow");
+
+
+      var delayMillis = 1500; 
+          setTimeout(function() {
+           console.log("DELAY");
+             $("#player").attr("src",player.imageleft[playerone]);
+         }, delayMillis);
+
+     
       //attack procedures
             console.log("player1 health - " + playerOneHealth);
             console.log("player2 heath - " + playerTwoHealth);
@@ -80,13 +105,27 @@ function attack(){
             playerOneAttack += 5;
             console.log("player1 new health - " + playerOneHealth);
             console.log("player2 new heath - " + playerTwoHealth);
+      //display health      
+      $("#playeroneTitle").html("Health = " + playerOneHealth);
+      $("#playertwoTitle").html("Health = " + playerTwoHealth);
 
       //game over playerone dies      
       if (playerOneHealth <=0) {
-        $("#vs").attr("src", "assets/images/gameover.jpg");
+        $("#vs").attr("src", "assets/images/gameover2.jpg");
+        $("#vs").css("position","fixed");
+        $("#vs").css("top","0");
+        $("#vs").css("left","0");
+        $("#vs").css("width","800px");
+        $("#vs").css("height","500px");
+        $("#vs").css("margin-right","200px");
+        $("#vs").css("z-index","6");
+       // var gameover = $("<img>");
+       // gameover.addClass("gameover");
+       // gameover.attr("src","assets/images/gameover2.gif");
+       // $("#player").append(gameover);
 
         //delay and then resets board
-        var delayMillis = 2500; 
+        var delayMillis = 2000; 
         setTimeout(function() {
            console.log("DELAY");
             location.reload();
@@ -95,21 +134,32 @@ function attack(){
       //If playerone wins 
       else if (playerTwoHealth <= 0 ) {
         //computer display gone
-        $("#computer").attr("src","");
-        //display pick new player
-        $(".pick").html("Click on an enemy from above.");
+        $("#computer").attr("src","assets/images/rip.png");
+        $(".pick").html("Pick another enemy");
         //decrease enemiesLeft for each defeat... if goes to 0.. end game -> win 
         enemiesLeft-- ;
         console.log("enemies left - " + enemiesLeft);
 
-      //Payer one wins  
+        var delayMillis = 1000; 
+          setTimeout(function() {
+           console.log("DELAY");
+           $("#computer").attr("src","");
+         }, delayMillis);
+
+
+      //Player one wins  
       if (enemiesLeft === 0){
           //display wins
-          $("#vs").attr("src",player.imagewins[playerone]);
-          var imageCrystal = $("<img>");
-          imageCrystal.addClass("you-win");
-          imageCrystal.attr("src", "assets/images/red.png");
-          $("#vs").append(imageCrystal);
+ 			//change image         
+        	$("#vs").attr("src",player.imagewins[playerone]);
+        	//change css for vs
+          	$("#vs").css("position","fixed");
+        	$("#vs").css("top","0");
+        	$("#vs").css("left","0");
+        	$("#vs").css("width","800px");
+        	$("#vs").css("height","500px");
+        	$("#vs").css("margin-right","200px");
+        	$("#vs").css("z-index","6");
           //delay and reset
           var delayMillis = 2500; 
           setTimeout(function() {
@@ -144,7 +194,7 @@ $(document).ready(function() {
   });
   
   $("#wolverine").on("click", function() {
-    // if player one... run playerboard function and change player image to playerone icon
+    // if player one... run playerboard function and change player image to player one icon
     if (isplayerone === true){
       playerone = 1;
       player.playerBoard(playerone);
@@ -197,47 +247,3 @@ $(document).ready(function() {
 
 }); // end document redy function
 
-
-
-
-
-// $(".crystal-image").on("click", function() {
-
-//     // Clicking the button triggers an alert message.
-//     alert("You clicked a crystal!");
-
-//   });
-
-
-// var targetNumber = 50;
-
-//   // Here we set the "number-to-guess" header to match the "targetNumber".
-//   // Eventually this will allow us to change the HTML to match the value in the JavaScript.
-//   $("#number-to-guess").text(targetNumber);
-
-//   if (counter === targetNumber) {
-
-//       // If the numbers match we'll celebrate the user's win.
-//       alert("You win!");
-//     }
-
-
-//     for (var i = 0; i < numberOptions.length; i++) {
-
-//     // For each iteration, we will create an imageCrystal
-//     var imageCrystal = $("<img>");
-
-//     // First each crystal will be given the class ".crystal-image".
-//     // This will allow the CSS to take effect.
-//     imageCrystal.addClass("crystal-image");
-
-//     // Each imageCrystal will be given a src link to the crystal image
-//     imageCrystal.attr("src", "http://cdn.playbuzz.com/cdn/35910209-2844-45c0-b099-f4d82878d54f/00261fda-4062-4096-81fd-8cf96b9034e8.jpg");
-
-//     // Each imageCrystal will be given a data attribute called data-crystalValue.
-//     // This data attribute will be set equal to the array value.
-//     imageCrystal.attr("data-crystalvalue", numberOptions[i]);
-
-//     // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
-//     $("#crystals").append(imageCrystal);
-//   }

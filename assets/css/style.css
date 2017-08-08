@@ -25,7 +25,8 @@ h3{
 .fighterBox{
 	width: 100%;
     height: 200px;
-    margin: -20px 0px 0px 110px;
+    margin: 90px 0px 0px 110px;
+    position:absolute;
 }
 
 .pick{
@@ -38,7 +39,8 @@ h3{
 #vs{
 	width: 80%;
     height: 110px;
-    margin: 32px 13px 0px 133px
+    margin: 75px 13px 0px 133px;
+    
 }
 
 .resetBox{
@@ -46,8 +48,7 @@ h3{
 	height:0px;
 	padding:0px;
 	border:0px;
-	background-colo
-	r:none;
+	background-color:none;
 }
 .box{
 	float:left;
@@ -60,7 +61,7 @@ h3{
 }
 
 .fighterPit{
-	margin:110px 0px 0px 0px;
+	margin:45px 0px 0px 0px;
 }
 
 .you-win{
@@ -90,6 +91,25 @@ h3{
 	padding:10px;
 	text-align:center;
 }
-.pick{
+#playeroneTitle{
+	margin: 0px -200px 0px 0px;
+	color:black;
+	text-align:center;
+	background:grey;
+}
 
+#playertwoTitle{
+	margin: 0px -230px 0px 0px;
+	color:black;
+	background:grey;
+	text-align:center;
+}
+.attack{
+	margin: 0px 0px 0px 0px;
+	background-color:red;
+}
+.gameover{
+	margin: 0px 0px 0px 0px;
+	height:900px;
+	width:700px;
 }
