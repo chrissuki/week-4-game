@@ -17,8 +17,8 @@ var player = {
     health : [120,100,150,180],
     image: ["assets/images/megamanright2.gif", "assets/images/wolverine.png","assets/images/mario.png","assets/images/ryu.png"],
     imageleft: ["assets/images/megaman4.gif","assets/images/wolverine.png","assets/images/marioleft.png","assets/images/rye_left.gif"],
-    imageright: ["assets/images/megamanright.gif","assets/images/wolverine.png","assets/images/mario.png","assets/images/ryuright.gif"],
-    imagefight: ["assets/images/megaman_left_attack.gif", "assets/images/wolverineLeft.gif", "assets/images/marioattack.gif", "assets/images/rye_left.gif"],
+    imageright: ["assets/images/megamanright.gif","assets/images/wolverine.png","assets/images/rightright.png","assets/images/ryuright.gif"],
+    imagefight: ["assets/images/megaman_left_attack.gif", "assets/images/wolverineLeft.gif", "assets/images/marioattack.gif", "assets/images/ryu_left.gif"],
     ids : ["megaman", "wolverine", "mario", "ryu"],
     imagewins: ["assets/iamges/megaman4.png", "assets/images/wolverinewins.", "assets/images/mariowins.jpg","assets/images/ryuwins.jpg"],
 
@@ -76,6 +76,11 @@ function attack(){
 
       //playerone attack gif
       $("#player").attr("src",player.imagefight[playerone]);
+      // attack sound
+      var audio = new Audio("assets/images/fight.mp3");
+      audio.play();
+
+
       if (playerone === 3){
       	//$("#player").animate({ height: "1000px", width: "200px"});
       	//$("#player").css("float","left");
@@ -86,14 +91,21 @@ function attack(){
       $("#player").animate({ left: "+=400px" }, "slow");
       $("#player").animate({ left: "-=400px" }, "slow");
 
-
       var delayMillis = 1500; 
           setTimeout(function() {
            console.log("DELAY");
              $("#player").attr("src",player.imageleft[playerone]);
          }, delayMillis);
 
-     
+      //counter attack
+      var delayMillis = 2500; 
+          setTimeout(function() {
+           console.log("DELAY 2" + playertwo);
+            $("#computer").attr("src",player.imageright[playertwo]);
+            $("#computer").animate({ left: "-=400px" }, "slow");
+            $("#computer").animate({ left: "+=400px" }, "slow");
+         }, delayMillis);
+
       //attack procedures
             console.log("player1 health - " + playerOneHealth);
             console.log("player2 heath - " + playerTwoHealth);
@@ -111,6 +123,7 @@ function attack(){
 
       //game over playerone dies      
       if (playerOneHealth <=0) {
+      	//change css and image to giant game over
         $("#vs").attr("src", "assets/images/gameover2.jpg");
         $("#vs").css("position","fixed");
         $("#vs").css("top","0");

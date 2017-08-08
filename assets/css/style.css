@@ -80,9 +80,7 @@ h3{
 
 
 .instruction-box{
-	clear:both;
 	background-color: grey;
-	width:22%;
 	height:100px;
 	margin: 27px 0px 0px 0px;
 }
@@ -105,7 +103,8 @@ h3{
 	text-align:center;
 }
 .attack{
-	margin: 0px 0px 0px 0px;
+	height:25px;
+	margin: 10px 0px 0px 0px;
 	background-color:red;
 }
 .gameover{
