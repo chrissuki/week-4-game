@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fighter Game</title>
+
+  <!-- Bootstrap File -->
+  <link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link rel="stylesheet" type = "text/css" href="assets/css/style.css">
+  <!-- JQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/javascript/game.js"></script>
+
+</head>
+<body>
+<img class = "fightingBG" src= "assets/images/background.gif">
+
+  <div class = "fluid-container">
+    <div class = "row">
+      <div class = "col-xs-12 col-sm-12 col-ms-12 col-lg-12">
+        <h1 class = "text-center game-title">Video Game Wars</h1>
+      </div>
+    </div>  
+    <div class = "row">  
+      <div class = "box megaman-box col-xs-3 col-sm-3 col-ms-3 col-lg-3">
+        <h3 id = "name-megaman" class = "name text-center">MegaMan</h3>
+        <img id = "megaman" class = "text-center characterBox" src = "assets/images/Megaman.jpg" data = "0">
+        <h4 id = "healthPT-megaman" class = "name text-center" data = "0">Health: <span id = "megamanHP">120</span> </h4>
+      </div>
+      <div class = "box wolverine-box col-xs-3 col-sm-3 col-ms-3 col-lg-3" >
+        <h3 id = "name-wolverine" class = "name text-center">Wolverine</h3>
+        <img id = "wolverine" class = "text-center characterBox " src = "assets/images/wolverine.jpg">
+        <h4 id = "healthPT-wolverine" class = "name text-center" data = "1">Health: <span id = "wolverineHP">100</span> </h4>
+      </div>
+      <div class = "box mario-box col-xs-3 col-sm-3 col-ms-3 col-lg-3">
+        <h3 id = "name-mario" class = "name text-center">Mario</h3>
+        <img id = "mario" class = "characterBox text-center " src = "assets/images/mario2.jpg">
+        <h4 id = "healthPT-mario" class = "name text-center" data = "2">Health: <span id = "marioHP">150</span> </h4>
+      </div>
+      <div class = "box ryu-box col-xs-3 col-sm-3 col-ms-3 col-lg-3">
+        <h3 id = "name-ryu" class = "name text-center">Ryu</h3>
+        <img id = "ryu" class = "text-ceter characterBox" src = "assets/images/ryu.jpg">
+        <h4 id = "healthPT-ryu" class = "name text-center" data = "3">Health: <span id = "ryuHP">180</span> </h4>
+      </div>
+    </div>  
+  </div>
+
+<div class = "instruction-box">
+  <h4 class = "instruction-header">Instructions:</h4>
+  <span class = "pick">Click on a character from above. (Megaman, Wolverine, Mario, Ryu)</span> </h4>
+</div>  
+
+<div class = "fluid-container fighterPit">  
+  <div class = "row">
+      <div class = "col-xs-3 col-sm-3 col-ms-3 col-lg-3">
+        <h3 id = "playeroneTitle"> </h3>
+        <img id = "player" class = "fighterBox">
+        <input id="clickMe" type="button" value="attack" onclick="attack();" />
+      </div>
+      <div class = "col-xs-3 col-sm-3 col-ms-3 col-lg-3">
+        <img id = "vs" class = "vs">
+      </div>
+      <div class = "col-xs-3 col-sm-3 col-ms-3 col-lg-3">
+        <h3 id = "playertwoTitle"> </h3>
+        <img id = "computer" class = "fighterBox">
+      </div>
+  </div>  
+
+
+</body>
+</html>
