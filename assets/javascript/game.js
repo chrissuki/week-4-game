@@ -97,15 +97,7 @@ function attack(){
              $("#player").attr("src",player.imageleft[playerone]);
          }, delayMillis);
 
-      //counter attack
-      var delayMillis = 2500; 
-          setTimeout(function() {
-           console.log("DELAY 2" + playertwo);
-            $("#computer").attr("src",player.imageright[playertwo]);
-            $("#computer").animate({ left: "-=400px" }, "slow");
-            $("#computer").animate({ left: "+=400px" }, "slow");
-         }, delayMillis);
-
+      
       //attack procedures
             console.log("player1 health - " + playerOneHealth);
             console.log("player2 heath - " + playerTwoHealth);
@@ -120,6 +112,17 @@ function attack(){
       //display health      
       $("#playeroneTitle").html("Health = " + playerOneHealth);
       $("#playertwoTitle").html("Health = " + playerTwoHealth);
+
+       //counter attack
+      if (playerTwoHealth > 0){
+      var delayMillis = 2500; 
+          setTimeout(function() {
+           console.log("DELAY 2" + playertwo);
+            $("#computer").attr("src",player.imageright[playertwo]);
+            $("#computer").animate({ left: "-=400px" }, "slow");
+            $("#computer").animate({ left: "+=400px" }, "slow");
+         }, delayMillis);
+        }
 
       //game over playerone dies      
       if (playerOneHealth <=0) {
@@ -147,13 +150,18 @@ function attack(){
       //If playerone wins 
       else if (playerTwoHealth <= 0 ) {
         //computer display gone
+        var delayMillis = 2000; 
+        setTimeout(function() {
+           console.log("DELAY");
+            $("#computer").attr("src","assets/images/rip.png");
+         }, delayMillis);
         $("#computer").attr("src","assets/images/rip.png");
         $(".pick").html("Pick another enemy");
         //decrease enemiesLeft for each defeat... if goes to 0.. end game -> win 
         enemiesLeft-- ;
         console.log("enemies left - " + enemiesLeft);
 
-        var delayMillis = 1000; 
+        var delayMillis = 2000; 
           setTimeout(function() {
            console.log("DELAY");
            $("#computer").attr("src","");
